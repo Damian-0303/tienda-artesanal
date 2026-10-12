@@ -75,6 +75,7 @@ const total = productos.reduce((acumulador, producto) => {
 const inputNombre = document.getElementById("nombreProducto");
 const inputPrecio = document.getElementById("precioProducto");
 const inputCategoria = document.getElementById("categoriaProducto");
+const inputCantidadDisponible = document.getElementById("cantidadDisponible");
 const botonAgregar = document.getElementById("btnAgregarProducto");
 const botonAdminisracion = document.getElementById("btnAdministracion");
 const panelAdministracion = document.getElementById("panelAdministracion")
@@ -82,6 +83,8 @@ const contenedorItems = document.getElementById("contenedor-items");
 const contenedorDeseos = document.getElementById("contenedor-deseos")
 
 function renderizarProductos() {
+
+    contenedorItems.innerHTML="";
   for (const producto of productos) {
     const productoHTML = `
             <div class="producto">
@@ -103,13 +106,12 @@ function renderizarProductos() {
 renderizarProductos();
 
 const botonDeseos = document.querySelectorAll(".btn-deseos");
+contenedorItems.addEventListener("click", function (evento){
+    if(evento.target.classList.contains("btn-deseos")) {
+        const idProducto = Number(evento.target.dataset.id);
 
-botonDeseos.forEach((boton) => {
-  boton.addEventListener("click", function () {
-    const idProducto = Number(boton.dataset.id);
-
-    agregarADeseos(idProducto);
-  });
+        agregarADeseos(idProducto);
+    }
 });
 
 function agregarADeseos(idProducto) {
@@ -140,7 +142,7 @@ function renderizarListaDeseos() {
         <h3>${producto.nombre}</h3>
         <p>Precio: $${producto.precio}</p>
         </div>
-        ;`
+        `
 
         contenedorDeseos.innerHTML += productoHTML;
     }
@@ -148,4 +150,28 @@ function renderizarListaDeseos() {
 
 botonAdminisracion.addEventListener("click", function (){
     panelAdministracion.hidden = !panelAdministracion.hidden;
+});
+
+botonAgregar.addEventListener("click", function (){
+    const nombre = inputNombre.value.trim();
+    const precio = Number(inputPrecio.value);
+    const categoria = inputCategoria.value;
+    const cantidadDisponible = Number(inputCantidadDisponible.value);
+
+    if (nombre === "" || inputPrecio.value === "" || precio <= 0) {
+        return;
+    }
+
+    const nuevoProducto = {
+        id: productos.length + 1,
+        nombre: nombre,
+        precio: precio,
+        categoria: categoria,
+        cantidadDisponible: cantidadDisponible
+        
+    };
+
+    productos.push(nuevoProducto);
+
+    renderizarProductos();
 });
