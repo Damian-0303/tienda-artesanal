@@ -35,6 +35,13 @@ const productos = [
     categoria: "Hogar",
     cantidadDisponible: 9,
   },
+   {
+    id: 6,
+    nombre: "Rosario",
+    precio: 800,
+    categoria: "Accesorios",
+    cantidadDisponible: 12,
+  },
 ];
 
 const listaDeseos = [];
@@ -69,6 +76,8 @@ const inputNombre = document.getElementById("nombreProducto");
 const inputPrecio = document.getElementById("precioProducto");
 const inputCategoria = document.getElementById("categoriaProducto");
 const botonAgregar = document.getElementById("btnAgregarProducto");
+const botonAdminisracion = document.getElementById("btnAdministracion");
+const panelAdministracion = document.getElementById("panelAdministracion")
 const contenedorItems = document.getElementById("contenedor-items");
 const contenedorDeseos = document.getElementById("contenedor-deseos")
 
@@ -110,5 +119,33 @@ function agregarADeseos(idProducto) {
     return;
   }
 
+  const yaExiste = listaDeseos.some (
+    productoDeseado => productoDeseado.id === idProducto
+  );
+
+  if (yaExiste){
+    return;
+  }
+
   listaDeseos.push(producto);
+  renderizarListaDeseos();
 }
+
+function renderizarListaDeseos() {
+    contenedorDeseos.innerHTML = "";
+
+    for (const producto of listaDeseos) {
+        const productoHTML =  `
+        <div class="producto-deseado">
+        <h3>${producto.nombre}</h3>
+        <p>Precio: $${producto.precio}</p>
+        </div>
+        ;`
+
+        contenedorDeseos.innerHTML += productoHTML;
+    }
+}
+
+botonAdminisracion.addEventListener("click", function (){
+    panelAdministracion.hidden = !panelAdministracion.hidden;
+});

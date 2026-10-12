@@ -1,0 +1,116 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f3ed;
+    color: #44353d;
+    margin: 30px;
+}
+
+h1{
+    text-align: center;
+    color: #a65d45;
+}
+
+h2 {
+    color: #6f8061;
+}
+
+/* tarjetas de productos */
+.producto {
+    background-color: #ffffff;
+    border: 1px solid #e8d9cc;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/*Nombre del producto */
+
+.producto h3 {
+    color: #a65d45;
+    margin-top: 0;
+}
+
+/*Precio */
+
+.producto p {
+    color: #44352d;
+    line-height: 1.5;
+}
+
+
+/*distribución prinicipal de la tienda */
+.tienda {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+
+/*Catalogo de productos */
+.catalogo {
+    flex: 3;
+    min-width: 0;
+}
+
+
+/*Panel de lista de deseos */
+.lista-deseos {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e8d9cc;
+     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+
+/*Grilla de productos  */
+#contenedor-items {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 20px;
+}
+
+/* Adaptación a pantallas medianas */
+@media (max-width: 1000px) {
+    #contenedor-items {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Adaptación a celulares */
+@media (max-width: 600px) {
+    .tienda {
+        flex-direction: column;
+    }
+
+    .catalogo,
+    .lista-deseos {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #contenedor-items {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/*Botones de la tienda */
+
+button {
+    background-color: #a65d45;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+/*Efecto al pasar el cursor */
+
+button:hover {
+    background-color: #82432f;
+}
