@@ -80,12 +80,14 @@ const botonAgregar = document.getElementById("btnAgregarProducto");
 const botonAdminisracion = document.getElementById("btnAdministracion");
 const panelAdministracion = document.getElementById("panelAdministracion")
 const contenedorItems = document.getElementById("contenedor-items");
-const contenedorDeseos = document.getElementById("contenedor-deseos")
+const contenedorDeseos = document.getElementById("contenedor-deseos");
+const mensajeFormulario = document.getElementById("mensajeFormulario")
+const buscadorProductos = document.getElementById("buscadorProductos");
 
-function renderizarProductos() {
+function renderizarProductos(listaProductos = productos) {
 
     contenedorItems.innerHTML="";
-  for (const producto of productos) {
+  for (const producto of listaProductos) {
     const productoHTML = `
             <div class="producto">
             <h3>${producto.nombre}</h3>
@@ -158,8 +160,21 @@ botonAgregar.addEventListener("click", function (){
     const categoria = inputCategoria.value;
     const cantidadDisponible = Number(inputCantidadDisponible.value);
 
-    if (nombre === "" || inputPrecio.value === "" || precio <= 0) {
-        return;
+    if (nombre === "" || 
+    inputPrecio.value === "" || 
+    precio <= 0 || 
+    inputCantidadDisponible.value === "" ||
+    !Number.isInteger(cantidadDisponible) ||
+    cantidadDisponible < 0
+) {
+
+    mensajeFormulario.textContent =
+
+    "EROR!! Revisá los datos: Ingresa un nombre, un precio mayor que cero y una cantidad válida. "
+    mensajeFormulario.className = "mensaje-error"
+   
+    return;
+        
     }
 
     const nuevoProducto = {
@@ -174,4 +189,20 @@ botonAgregar.addEventListener("click", function (){
     productos.push(nuevoProducto);
 
     renderizarProductos();
+
+    mensajeFormulario.textContent = "¡Producto agregado correctamente!";
+    mensajeFormulario.className= "mensaje-exito"
+    inputNombre.value = "";
+    inputPrecio.value = "";
+    inputCantidadDisponible.value = "";
+});
+
+buscadorProductos.addEventListener("input", function (){
+    const textoBusqueda = buscadorProductos.value.toLowerCase().trim();
+
+    const productosFiltrados = productos.filter(producto => 
+      producto.nombre.toLocaleLowerCase().includes(textoBusqueda)  
+    );
+
+    renderizarProductos(productosFiltrados);
 });

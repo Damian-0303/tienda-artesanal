@@ -114,3 +114,22 @@ button {
 button:hover {
     background-color: #82432f;
 }
+
+/*Mensajes del formualrio */
+
+#mensajeFormulario {
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.mensaje-error {
+    color: #b42318;
+    background-color: #fee4e2;
+}
+
+.mensaje-exito {
+    color: #067647;
+    background-color: #d1fadf;
+}
