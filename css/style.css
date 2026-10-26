@@ -77,6 +77,19 @@ h2 {
     #contenedor-items {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+     #panelAdministracion {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    #panelAdministracion input,
+    #panelAdmoinistracion select,
+    #panelAdministracion button {
+        width: 100%;
+        box-sizing: border-box;
+    }
 }
 
 /* Adaptación a celulares */
@@ -84,6 +97,7 @@ h2 {
     .tienda {
         flex-direction: column;
     }
+
 
     .catalogo,
     .lista-deseos {
@@ -94,6 +108,25 @@ h2 {
     #contenedor-items {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    #panelAdministracion {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    #panelAdministracion input,
+    #panelAdmoinistracion select,
+    #panelAdministracion button {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+#panelAdministracion[hidden] {
+
+    display: none;
+
 }
 
 /*Botones de la tienda */

@@ -44,33 +44,10 @@ const productos = [
   },
 ];
 
-const listaDeseos = [];
+const listaDeseos = [
 
-//Solicita al usuario el nombre del producto que quiere buscar
-const nombreBuscado = "¿Qué producto querés buscar?";
-const productoBuscado = productos.find(
-  (producto) => producto.nombre === nombreBuscado,
-);
+];
 
-if (productoBuscado) {
-} else {
-}
-
-// Solicita al usuario una categoria para buscar
-const categoriaBuscada = "¿Qué categría quieres buscar?";
-const productosEncontrados = productos.filter(
-  (producto) => producto.categoria === categoriaBuscada,
-);
-
-// Preparamos información de los productos para mostrar nombre y precio
-const listadoProductos = productos.map(
-  (producto) => producto.nombre + " - $" + producto.precio,
-);
-
-// Mostramos el total de los productos
-const total = productos.reduce((acumulador, producto) => {
-  return acumulador + producto.precio;
-}, 0);
 
 const inputNombre = document.getElementById("nombreProducto");
 const inputPrecio = document.getElementById("precioProducto");
@@ -107,7 +84,7 @@ function renderizarProductos(listaProductos = productos) {
 
 renderizarProductos();
 
-const botonDeseos = document.querySelectorAll(".btn-deseos");
+
 contenedorItems.addEventListener("click", function (evento){
     if(evento.target.classList.contains("btn-deseos")) {
         const idProducto = Number(evento.target.dataset.id);
@@ -153,36 +130,41 @@ function renderizarListaDeseos() {
 botonAdminisracion.addEventListener("click", function (){
     panelAdministracion.hidden = !panelAdministracion.hidden;
 });
+function validarProducto(nombre, precio, cantidadDisponible) {
+  return (
+    nombre !== "" && 
+    precio > 0 && 
+    Number.isFinite(precio) && 
+    Number.isInteger(cantidadDisponible) &&
+    cantidadDisponible >= 0
+  );
 
-botonAgregar.addEventListener("click", function (){
+}
+function agregarProducto(){
     const nombre = inputNombre.value.trim();
     const precio = Number(inputPrecio.value);
     const categoria = inputCategoria.value;
     const cantidadDisponible = Number(inputCantidadDisponible.value);
 
-    if (nombre === "" || 
+   if (
     inputPrecio.value === "" || 
-    precio <= 0 || 
     inputCantidadDisponible.value === "" ||
-    !Number.isInteger(cantidadDisponible) ||
-    cantidadDisponible < 0
-) {
+    !validarProducto(nombre, precio, cantidadDisponible)
+   ){
 
-    mensajeFormulario.textContent =
-
-    "EROR!! Revisá los datos: Ingresa un nombre, un precio mayor que cero y una cantidad válida. "
-    mensajeFormulario.className = "mensaje-error"
-   
+    mensajeFormulario.textContent = 
+    "Revisá los datos: ingresá un nombre , un precio mayor que cero y una cantidad válida."
+    mensajeFormulario.className = "mensaje-error";
     return;
-        
-    }
+
+   }
 
     const nuevoProducto = {
         id: productos.length + 1,
-        nombre: nombre,
-        precio: precio,
-        categoria: categoria,
-        cantidadDisponible: cantidadDisponible
+        nombre,
+        precio,
+        categoria,
+        cantidadDisponible
         
     };
 
@@ -195,7 +177,9 @@ botonAgregar.addEventListener("click", function (){
     inputNombre.value = "";
     inputPrecio.value = "";
     inputCantidadDisponible.value = "";
-});
+}
+
+botonAgregar.addEventListener("click", agregarProducto);
 
 buscadorProductos.addEventListener("input", function (){
     const textoBusqueda = buscadorProductos.value.toLowerCase().trim();

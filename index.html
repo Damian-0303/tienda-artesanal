@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,7 +8,12 @@
     <link rel="stylesheet" href="./css/style.css">
   </head>
   <body>
+
+    <header>
     <h1>Rosina Creaciones</h1>
+    </header>
+
+    <main>
 
     <button id="btnAdministracion">
       
@@ -22,12 +27,16 @@
 
     <p id="mensajeFormulario"></p>
 
+    <label for="nombreProducto">Nombre del producto</label>
     <input id="nombreProducto" type="text" placeholder="Nombre del producto" />
+     
+    <label for="precioProducto">Precio</label>
+    <input id="precioProducto" type="number" placeholder="Precio" />
 
-    <input id="precioProducto" type="" placeholder="Precio" />
-
-     <input id="cantidadDisponible" type="number" placeholder="Cantidad Disponible" />
-
+    <label for="cantidadDisponible">Cantidad disponible</label>
+    <input id="cantidadDisponible" type="number" placeholder="Cantidad Disponible" />
+     
+    <label for="categoriaProducto">Categoría</label>
     <select name="Categoria" id="categoriaProducto">
       <option value="Accesorios">Accesorios</option>
       <option value="Decoración">Decoración</option>
@@ -40,10 +49,10 @@
      <div class="tienda">
       <section class="catalogo">
         <h2>Nuestros productos</h2>
-
+        <label for="buscadorProductos">Buscar productos</label>
         <input type="text"
         id="buscadorProductos"
-        placeholder="Buscar producotos...">
+        placeholder="Buscar productos...">
         
     <div id="contenedor-items"></div>
     </section>
@@ -54,5 +63,7 @@
     </aside>
 
   </div>
+
+  </main>
   </body>
 </html>
