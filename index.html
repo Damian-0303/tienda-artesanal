@@ -24,6 +24,11 @@
     <div id="panelAdministracion" hidden>
 
     <h2>Agregar Producto</h2>
+    <label for="seleccionarProducto">Modificar producto existente</label>
+    <select id="seleccionarProducto">
+      <option value="">Seleccionar producto</option>
+
+    </select>
 
     <p id="mensajeFormulario"></p>
 
@@ -44,6 +49,8 @@
     </select>
 
     <button id="btnAgregarProducto">Agregar producto</button>
+    <button id="btnCancelarEdicion" type="button" hidden>Cancelar edicion</button>
+    <button id="btnEliminarProducto" type="button">Eliminar producto</button>
 
     </div>
      <div class="tienda">
@@ -60,6 +67,10 @@
     <aside class="lista-deseos">
     <h2>Mi lista de deseos</h2>
     <div id="contenedor-deseos"></div>
+
+    <button id="btnVaciarDeseos">
+      Vaciar lista de deseos 
+    </button>
     </aside>
 
   </div>

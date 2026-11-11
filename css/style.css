@@ -62,6 +62,11 @@ h2 {
     border-radius: 12px;
     border: 1px solid #e8d9cc;
      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+     margin-top: 20px;
+}
+
+#btnVaciarDeseos {
+    margin-top: 20px;
 }
 
 
@@ -85,7 +90,7 @@ h2 {
     }
 
     #panelAdministracion input,
-    #panelAdmoinistracion select,
+    #panelAdministracion select,
     #panelAdministracion button {
         width: 100%;
         box-sizing: border-box;
@@ -116,7 +121,7 @@ h2 {
     }
 
     #panelAdministracion input,
-    #panelAdmoinistracion select,
+    #panelAdministracion select,
     #panelAdministracion button {
         width: 100%;
         box-sizing: border-box;
