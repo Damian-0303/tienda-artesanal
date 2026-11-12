@@ -5,31 +5,39 @@
 Rosina Creaciones es un simulador de una tienda online de productos artesanales, desarrollado 
 como proyecto de aprendizaje para practicar HTML, CSS y JavaScript. 
 
-El proyecto permite visualizar productos, buscarlos por nombre y agregarlos a una lista de deseos. 
+El proyecto permite visualizar productos, buscarlos por nombre y agregarlos a una lista de deseos y administrar el cátalogo de productos. 
 
 ### Funcionalidades 
 
 - Visualización dinámica de productos. 
-- Busqurda de proeductos por nombre. 
+- Busqueda de proeductos por nombre. 
 - Lista de deseos sin productos duplicados.
-- Panel de administración para agreagar productos.
+- Panel de administración para agreagar, editar y eliminar productos.
 - Registro de nombre, precio, categoría y cantidad disponible. 
-- Validacón de los datos ingresados.
+- Validación de los datos ingresados.
 - Mensajes visuales de error y confirmación.
-- Diseño adaptable a distintos tamaños de pantalla. 
+- Diseño adaptable a distintos tamaños de pantalla.
+- Persistencia de productos y lista de deseos mediante LocalStorage.
+- Sincronización de datos entre JavaScript, LocalStorage y el DOM. 
+- Mensaje de biemvenida que aparece automáticamente luego de unos segundos.
+- Procesamiento asíncrono al agregar productos a la lista de deseos.
+- Uso de promises, async/await y setTimeout para simular operaciones asincronas. 
+- Manejo de errores mediante try/catch/finally. 
 
 **Tecnologías utilizadas**
--HTML5
+- HTML5
 
 - CSS3
 
-- javaScript 
+- JavaScript 
+
+- LocalStorage
 
 **Estructura del proyecto**
 
-- index.html: Estructura de la pagina. 
+- index.html: Estructura de la página. 
 - css/style.css: Estilos visuales. 
-- js/main.js: Lójica e interactividad.
+- js/main.js: Lógica e interactividad.
 
 **Como ejecutar el proyecto**
 
@@ -39,7 +47,7 @@ El proyecto permite visualizar productos, buscarlos por nombre y agregarlos a un
 
 **Estado del proyecto**
 
-Proyecto en desarrollo, correspondiente a la Pre-Entrega 7 de JavaScript 
+Proyecto en desarrollo, correspondiente a la Pre-Entrega 9 de JavaScript. 
 
 
 

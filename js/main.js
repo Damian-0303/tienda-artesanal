@@ -58,6 +58,15 @@ function guardarListaDeseos() {
   localStorage.setItem("listaDeseos", JSON.stringify(listaDeseos));
 }
 
+function procesarDeseo(producto) {
+  return new Promise((resolve, reject) => {
+    setTimeout (() => {
+     resolve(producto);
+    }, 2000 );
+ 
+  });
+
+}
 
 const inputNombre = document.getElementById("nombreProducto");
 const inputPrecio = document.getElementById("precioProducto");
@@ -70,6 +79,7 @@ const botonAdminisracion = document.getElementById("btnAdministracion");
 const panelAdministracion = document.getElementById("panelAdministracion");
 const contenedorItems = document.getElementById("contenedor-items");
 const contenedorDeseos = document.getElementById("contenedor-deseos");
+const estadoDeseos = document.getElementById("estadoDeseos");
 const botonVaciarDeseos = document.getElementById("btnVaciarDeseos");
 const mensajeFormulario = document.getElementById("mensajeFormulario")
 const buscadorProductos = document.getElementById("buscadorProductos");
@@ -152,25 +162,45 @@ contenedorDeseos.addEventListener("click", function (evento){
   }
 });
 
-function agregarADeseos(idProducto) {
-  const producto = productos.find((producto) => producto.id === idProducto);
+async function agregarADeseos(idProducto) {
+  const producto = productos.find(
+    producto => producto.id === idProducto
+  );
 
-  if (producto === undefined) {
+  if (!producto) {
     return;
   }
 
-  const yaExiste = listaDeseos.some (
+  const yaExiste = listaDeseos.some(
     productoDeseado => productoDeseado.id === idProducto
   );
 
   if (yaExiste){
+    estadoDeseos.textContent = "Este producto ya está en tu lista de deseos.";
     return;
   }
 
-  listaDeseos.push(producto);
-  guardarListaDeseos();
-  renderizarListaDeseos();
+  try {
+    estadoDeseos.textContent = "⏳ Procesando tu solicitud...";
+
+    const productoProcesado = await procesarDeseo(producto);
+
+    listaDeseos.push(productoProcesado);
+
+    guardarListaDeseos();
+    renderizarListaDeseos();
+
+    estadoDeseos.textContent = "✔️ Producto agregado correctamente.";
+
+ } catch (error) {
+  estadoDeseos.textContent =   "⚠️ No se pudo agregar el producto. Intentá nuevamente.";
+  console.error("Error al agregar a deseos:", error);
+} finally {
+  console.log("Proceso de lista de deseos finalizado");
 }
+}
+
+
 
 function eliminarDeDeseos (idProducto){
   const indice = listaDeseos.findIndex(
@@ -375,4 +405,23 @@ buscadorProductos.addEventListener("input", function (){
 
     renderizarProductos(productosFiltrados);
 });
+
+setTimeout(() => {
+  const mensaje = document.getElementById("mensajeBienvenida");
+
+   mensaje.textContent = "¡Bienvenido a Rosina Creaciones! Descubrí nuestros productos artesanales.";
+
+  mensaje.classList.add("mostrar");
+
+  setTimeout(() => {
+    mensaje.classList.remove("mostrar");
+  }, 4000);
+  }, 3000);
+
+ 
+
+ 
+    
+  
+
 
