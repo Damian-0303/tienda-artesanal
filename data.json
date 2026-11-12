@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "nombre": "Pulsera",
+    "precio": 500,
+    "categoria": "Accesorios",
+    "cantidadDisponible": 8
+  },
+  {
+    "id": 2,
+    "nombre": "Collar",
+    "precio": 800,
+    "categoria": "Accesorios",
+    "cantidadDisponible": 5
+  },
+  {
+    "id": 3,
+    "nombre": "Cuadro",
+    "precio": 1200,
+    "categoria": "Decoración",
+    "cantidadDisponible": 3
+  },
+  {
+    "id": 4,
+    "nombre": "Porta velas",
+    "precio": 650,
+    "categoria": "Decoración",
+    "cantidadDisponible": 1
+  },
+  {
+    "id": 5,
+    "nombre": "Mate artesanal",
+    "precio": 950,
+    "categoria": "Hogar",
+    "cantidadDisponible": 9
+  },
+   {
+    "id": 6,
+    "nombre": "Rosario",
+    "precio": 800,
+    "categoria": "Accesorios",
+    "cantidadDisponible": 12
+  }
+]

@@ -1,51 +1,7 @@
 
-const productosIniciales = [
-  {
-    id: 1,
-    nombre: "Pulsera",
-    precio: 500,
-    categoria: "Accesorios",
-    cantidadDisponible: 8,
-  },
-  {
-    id: 2,
-    nombre: "Collar",
-    precio: 800,
-    categoria: "Accesorios",
-    cantidadDisponible: 5,
-  },
-  {
-    id: 3,
-    nombre: "Cuadro",
-    precio: 1200,
-    categoria: "Decoración",
-    cantidadDisponible: 3,
-  },
-  {
-    id: 4,
-    nombre: "Porta velas",
-    precio: 650,
-    categoria: "Decoración",
-    cantidadDisponible: 1,
-  },
-  {
-    id: 5,
-    nombre: "Mate artesanal",
-    precio: 950,
-    categoria: "Hogar",
-    cantidadDisponible: 9,
-  },
-   {
-    id: 6,
-    nombre: "Rosario",
-    precio: 800,
-    categoria: "Accesorios",
-    cantidadDisponible: 12,
-  },
-];
 
 const productosGuardados = JSON.parse(localStorage.getItem("productos"));
-const productos = productosGuardados ?? productosIniciales;
+let productos = productosGuardados ?? [];
 
 const listaDeseosGuardada = JSON.parse(localStorage.getItem("listaDeseos"));
 const listaDeseos = listaDeseosGuardada ?? [];
@@ -57,6 +13,75 @@ function guardarProductos() {
 function guardarListaDeseos() {
   localStorage.setItem("listaDeseos", JSON.stringify(listaDeseos));
 }
+
+async function cargarProductos() {
+
+  let errorCarga = false;
+  
+  try {
+   
+
+    Swal.fire({
+    title: "Cargando productos...",
+    text: "Estamos preparando el catálogo de Rosina Creaciones.",
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading();
+    }
+   });
+   
+
+
+    if(productosGuardados){
+      productos = productosGuardados;
+
+    } else {
+
+    const respuesta = await fetch("./data.json");
+
+    if (!respuesta.ok){
+      throw new Error("No se pudieron cargar los productos");
+    }
+    productos = await respuesta.json();
+    guardarProductos();
+  }
+    
+}  catch (error){
+
+  errorCarga = true;
+  console.error("Error al cargar los productos:", error);
+} finally {
+  Swal.close();
+}
+
+if (errorCarga) {
+  Swal.fire({
+    icon: "error",
+    title: "Error de carga",
+    text: "No se pudieron cargar los productos. Intentá nuevamente."
+  });
+} else {
+ await Swal.fire({
+    icon: "success",
+    title: "¡Catálogo listo!",
+    text: "Los productos se cargaron correctamente.",
+    timer: 2000,
+    showConfirmButton: false
+  });
+}
+}
+function mostrarBienvenida() {
+  const mensaje = document.getElementById("mensajeBienvenida");
+
+  mensaje.textContent = "¡Bienvenido a Rosina creaciones! Descubrí nuestros productos artesanales.";
+
+  mensaje.classList.add("mostrar");
+
+  setTimeout(() => {
+    mensaje.classList.remove("mostrar");
+  }, 4000);
+}
+
 
 function procesarDeseo(producto) {
   return new Promise((resolve, reject) => {
@@ -113,9 +138,7 @@ function renderizarProductos(listaProductos = productos) {
   }
 }
 
-renderizarProductos();
-renderizarListaDeseos();
-cargarProductosEnSelector();
+
 
 function cargarProductosEnSelector(){
   seleccionarProducto.innerHTML = '<option value="">Seleccionar producto</option>';
@@ -196,7 +219,7 @@ async function agregarADeseos(idProducto) {
   estadoDeseos.textContent =   "⚠️ No se pudo agregar el producto. Intentá nuevamente.";
   console.error("Error al agregar a deseos:", error);
 } finally {
-  console.log("Proceso de lista de deseos finalizado");
+ 
 }
 }
 
@@ -214,8 +237,8 @@ function eliminarDeDeseos (idProducto){
 
     guardarListaDeseos();
     renderizarListaDeseos();
-  
 }
+
 
 function eliminarProducto (idProducto){
   const indice = productos.findIndex(
@@ -242,8 +265,8 @@ function eliminarProducto (idProducto){
   renderizarProductos();
   renderizarListaDeseos();
   cargarProductosEnSelector();
-
 }
+
 
 botonEliminarProducto.addEventListener("click", function (){
   const idProducto = Number(seleccionarProducto.value);
@@ -252,22 +275,39 @@ botonEliminarProducto.addEventListener("click", function (){
     mensajeFormulario.textContent = "Seleccioná un producto para eliminar.";
     mensajeFormulario.className = "mensaje-error";
     return;
-
   }
 
-  const confirmar = confirm("¿Estas seguro que quieres elminiar este producto?");
-  
-  if (confirmar) {
+
+
+ Swal.fire({
+  title:"¿Eliminar producto?",
+  text: "Esta acción eliminará el producto del catálogo.",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#d33",
+  cancelButtonColor: "#3085d6",
+  confirmButtonText: "Sí, eliminar",
+  cancelButtonText: "Cancelar"
+ }).then((resultado) => {
+  if (resultado.isConfirmed) {
     eliminarProducto(idProducto);
 
     cancelarEdicion();
 
-    mensajeFormulario.textContent = "Producto eliminado correctamente.";
-    mensajeFormulario.className = "mensaje-exito"
+     Swal.fire({
+      icon: "success",
+      title: "Producto eliminado",
+      text: "El producto se eliminó correctamente.",
+      timer: 2000,
+      showConfirmButton: false
+    });
   }
-}
 
-);
+});
+});
+
+
+
 
 function vaciarListaDeseos() {
   listaDeseos.length = 0;
@@ -406,18 +446,19 @@ buscadorProductos.addEventListener("input", function (){
     renderizarProductos(productosFiltrados);
 });
 
-setTimeout(() => {
-  const mensaje = document.getElementById("mensajeBienvenida");
 
-   mensaje.textContent = "¡Bienvenido a Rosina Creaciones! Descubrí nuestros productos artesanales.";
 
-  mensaje.classList.add("mostrar");
+async function iniciarTienda(){
+  await cargarProductos();
 
-  setTimeout(() => {
-    mensaje.classList.remove("mostrar");
-  }, 4000);
-  }, 3000);
+  renderizarProductos();
+  renderizarListaDeseos();
+  cargarProductosEnSelector();
 
+  mostrarBienvenida();
+}
+
+iniciarTienda();
  
 
  

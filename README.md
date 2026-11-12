@@ -23,6 +23,11 @@ El proyecto permite visualizar productos, buscarlos por nombre y agregarlos a un
 - Procesamiento asíncrono al agregar productos a la lista de deseos.
 - Uso de promises, async/await y setTimeout para simular operaciones asincronas. 
 - Manejo de errores mediante try/catch/finally. 
+- Carga dinámica de productos mediante fetch desde un archivo JSON local.
+- Uso de async/await para gestionar peticiones asíncronas.
+- Manejo de errores mediante try/catch/finally.
+- Notificaciones interactivas con la librería SweetAlert2.
+- Confirmación de eliminación de productos mediante ventanas personalizadas. 
 
 **Tecnologías utilizadas**
 - HTML5
@@ -33,11 +38,18 @@ El proyecto permite visualizar productos, buscarlos por nombre y agregarlos a un
 
 - LocalStorage
 
+- JSON
+
+- Fetch API
+
+- SweetAlert2
+
 **Estructura del proyecto**
 
 - index.html: Estructura de la página. 
 - css/style.css: Estilos visuales. 
 - js/main.js: Lógica e interactividad.
+- data.json: Archivo que contiene los datos inicales de los productos. 
 
 **Como ejecutar el proyecto**
 
@@ -47,7 +59,7 @@ El proyecto permite visualizar productos, buscarlos por nombre y agregarlos a un
 
 **Estado del proyecto**
 
-Proyecto en desarrollo, correspondiente a la Pre-Entrega 9 de JavaScript. 
+Proyecto en desarrollo, correspondiente a la Pre-Entrega 10 de JavaScript. 
 
 
 
